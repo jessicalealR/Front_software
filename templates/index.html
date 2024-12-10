@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Rutas</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <div id="menu">
+        <img src="{{ url_for('static', filename='images/menu.png') }}" alt="Menú" class="menu-icon">
+        <div id="menu-content">
+            <a href="/ingresoUsuarios">Ingreso Usuario</a>
+            <a href="/registro">Registrar Usuarios</a>
+        </div>
+    </div>
+
+    <script src="static/js/App.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+
+        const map = L.map('map').setView([4.6097100, -74.0817500], 13);
+
+        L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+            attribution: '&copy; <a href="https://www.google.com/intl/es_es/help/terms_maps.html">Google</a>'
+        }).addTo(map);
+    </script>
+</body>
+</html>
