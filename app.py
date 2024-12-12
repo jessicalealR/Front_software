@@ -1,6 +1,7 @@
 from flask import Flask, render_template,redirect,url_for, session
 
 app = Flask(__name__)
+app.secret_key = 'supersecretkey'
  # Función para geocodificar una dirección
 def geocodificar(direccion):
     
@@ -52,12 +53,12 @@ def registrar_usuario():
     return render_template('registro.html')
 
 @app.route('/ingresoUsuarios')
-def ingreso_usuarios():
+def ingreso_Usuarios():
     return render_template('ingresoUsuarios.html')
 
 
 @app.route('/usuarioRegistrado')
-def usuario_registrado():
+def usuarioregistrado():
     return render_template('usuarioRegistrado.html')
 
 @app.route('/comentarios')
@@ -75,7 +76,7 @@ def perfil():
 @app.route('/logout') 
 def logout(): 
     session.pop('user_id', None) 
-    return redirect(url_for('main'))
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)

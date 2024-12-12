@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
         menuContent.style.display = menuContent.style.display === 'block' ? 'none' : 'block';
         event.stopPropagation();
     });
-
+    
     document.addEventListener('click', function() {
 
         menuContent.style.display = 'none';

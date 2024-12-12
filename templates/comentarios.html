@@ -48,12 +48,58 @@
         </div>
 
         <div id="new-comment">
-            <textarea placeholder="Deja tu comentario..." rows="3"></textarea>
+            <textarea id="comment-text" placeholder="Deja tu comentario..." rows="3"></textarea>
             <button id="post-comment">Publicar</button>
         </div>
+        
     </div>
 
     <script src="static/js/App.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Manejador de eventos para el botón "Publicar"
+        document.getElementById('post-comment').addEventListener('click', function() {
+            const commentText = document.getElementById('comment-text').value.trim();
+
+            if (commentText) {
+                // Enviar el comentario al servidor (usando una ruta de Flask)
+                fetch('/comment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ content: commentText })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert('Error al publicar el comentario');
+                    } else {
+                        // Agregar el comentario a la lista de comentarios
+                        const commentsList = document.getElementById('comments-list');
+                        const newComment = document.createElement('div');
+                        newComment.classList.add('comment');
+                        newComment.innerHTML = `
+                            <div class="comment-header">
+                                <span class="username">Tú</span>
+                                <span class="time">${data.comment.timestamp}</span>
+                            </div>
+                            <div class="comment-body">
+                                <p>${data.comment.content}</p>
+                            </div>
+                        `;
+                        commentsList.prepend(newComment);
+                        document.getElementById('comment-text').value = '';  // Limpiar el campo
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Ocurrió un error al publicar el comentario');
+                });
+            } else {
+                alert('El comentario no puede estar vacío');
+            }
+        });
+    </script>
 </body>
 </html>
