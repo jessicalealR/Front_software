@@ -19,7 +19,7 @@
             <a href="/historial">Historial de Viajes</a>
             <a href="/comentarios">Comunidad</a>
             <a href="/ajustes">Ajustes de Ruta</a>
-            <a href="/logout">Cerrar Sesión</a>
+            <a id="logout" href="#">Cerrar Sesión</a> <!-- Aquí agregamos el id "logout" -->
         </div>
     </div>
 
@@ -100,6 +100,12 @@
         }
 
         fetchTripHistory();  // Llamar la función para mostrar historial
+
+        // Función para manejar "Cerrar Sesión"
+        document.getElementById('logout').addEventListener('click', () => {
+            // Aquí puedes añadir lógica para limpiar la sesión del usuario si es necesario
+            window.location.href = '/';  // Redirigir a la página principal
+        });
 
     </script>
 </body>
