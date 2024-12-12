@@ -55,6 +55,7 @@ def registrar_usuario():
 def ingreso_usuarios():
     return render_template('ingresoUsuarios.html')
 
+
 @app.route('/usuarioRegistrado')
 def usuario_registrado():
     return render_template('usuarioRegistrado.html')
